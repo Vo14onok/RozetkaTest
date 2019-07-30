@@ -75,7 +75,7 @@ public class RoztkaTest {
         WebElement compare = driver.findElement(By.cssSelector("#comparison-header"));
         actions.moveToElement(compare).perform();
         driver.findElement(By.cssSelector("#comparison-header")).click();
-        driver.findElement(By.cssSelector("div.btn-link-to-compare > a > span")).click();
+        driver.findElement(By.cssSelector("div.btn-link-to-compare > a")).click();
 
 
         //Output compare result to console
