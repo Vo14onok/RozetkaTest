@@ -37,7 +37,7 @@ public class RoztkaTest {
         int element;
         Random r = new Random();
 
-        driver.findElement(By.cssSelector("a.header-cities__link.link-dashed")).click();
+        driver.findElement(By.cssSelector(".header-cities__link.link-dashed")).click();
         List<WebElement> list = driver.findElements(By.cssSelector("a.header-location__popular-link"));
         element = r.nextInt((list.size()) - 1);
         driver.findElements(By.cssSelector("a.header-location__popular-link")).get(element).click();
@@ -85,7 +85,6 @@ public class RoztkaTest {
             System.out.println(a);
         }
 
-        driver.close();
         driver.quit();
     }
 }
