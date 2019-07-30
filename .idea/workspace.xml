@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="57813040-f6d3-427e-96a7-4c83dc41ec58" name="Default Changelist" comment="&quot;WebSite (rozetka.com.ua) testing with selenium &amp; cucumber&quot;">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Training.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/stepdefs/RoztkaTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/rozetka.feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/Test.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/rozetka.feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/stepdefs/RoztkaTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/rozetka.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/rozetka.feature" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -259,6 +245,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/RozetkaTest" />
+    </ignored-roots>
     <MESSAGE value="&quot;WebSite (rozetka.com.ua) testing with selenium &amp; cucumber&quot;" />
     <option name="LAST_COMMIT_MESSAGE" value="&quot;WebSite (rozetka.com.ua) testing with selenium &amp; cucumber&quot;" />
   </component>

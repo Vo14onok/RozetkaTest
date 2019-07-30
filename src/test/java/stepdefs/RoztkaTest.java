@@ -2,7 +2,6 @@ package stepdefs;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -46,7 +45,7 @@ public class RoztkaTest {
 
     }
 
-    @When("^I using search field search \"([^\"\"$]*)\"$")
+    @Then("^I using search field search \"([^\"\"$]*)\"$")
     public void SearchItems(String arg1) {
 
         driver.findElement(By.name("search")).sendKeys(arg1);
