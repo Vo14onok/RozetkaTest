@@ -103,7 +103,12 @@ public class RoztkaTest {
     public void TakeScreenshot () throws IOException {
 
         File screenshot =((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(screenshot, new File(System.getProperty("user.dir") + "\\screenshot\\" + java.time.LocalDate.now() +".jpg"));
+        FileUtils.copyFile(screenshot, new File(System.getProperty("user.dir")
+                + File.separator
+                + "screenshot"
+                + File.separator
+                + java.time.LocalDate.now()
+                +".jpg"));
 
         driver.quit();
 
