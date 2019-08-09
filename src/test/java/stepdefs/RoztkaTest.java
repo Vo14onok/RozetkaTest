@@ -39,19 +39,19 @@ public class RoztkaTest {
     @Then("^select producer \"([^\"\"$]*)\", \"([^\"\"$]*)\" and \"([^\"\"$]*)\"$")
     public void SelectProducer(String arg1, String  arg2, String arg3) {
 
-        $(cssSelector("[name=producer_148]")).doubleClick();
-        $(cssSelector("[name=producer_14]")).doubleClick();
-        $(cssSelector("[name=producer_12]")).doubleClick();
+        $(cssSelector("[name=producer_148]")).click();
+        $(cssSelector("[name=producer_14]")).click();
+        $(cssSelector("[name=producer_12]")).click();
 
     }
 
-//    @Then("^sort by popularity$")
-//    public void SortByPopularity () {
-//
-//        $(cssSelector("a.dropdown-link")).click();
-//        $("#filter_sortpopularity").should(visible).click();
-//
-//    }
+    @Then("^sort by popularity$")
+    public void SortByPopularity () {
+
+        $(cssSelector("a.dropdown-link")).click();
+        $("#filter_sortpopularity").should(visible).click();
+
+    }
 
     @Then("^select (\\d+) first results$")
     public void SelectResults(int arg1) {
