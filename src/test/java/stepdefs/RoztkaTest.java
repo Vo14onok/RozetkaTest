@@ -23,43 +23,42 @@ public class RoztkaTest {
     @Then("^select any city$")
     public void SelectCity() {
 
-        $(cssSelector(".header-cities__link.link-dashed")).click();
-        int element = new Random().nextInt(($$(cssSelector("a.header-location__popular-link")).size()) - 1);
-        $$(cssSelector("a.header-location__popular-link")).get(element).click();
+        $(".header-cities__link.link-dashed").click();
+        int element = new Random().nextInt(($$("a.header-location__popular-link").size()) - 1);
+        $$("a.header-location__popular-link").get(element).click();
 
     }
 
     @Then("^I using search field search \"([^\"\"$]*)\"$")
     public void SearchItems(String arg1) {
 
-        $(cssSelector("[name=search]")).val(arg1).pressEnter();
+        $("[name=search]").val(arg1).pressEnter();
 
     }
 
-    @Then("^select producer \"([^\"\"$]*)\", \"([^\"\"$]*)\" and \"([^\"\"$]*)\"$")
-    public void SelectProducer(String arg1, String  arg2, String arg3) {
+    @Then("^select producer \"Boch\", \"LG\" and \"Samsung\"$")
+    public void SelectProducer() {
 
-        $(cssSelector("[name=producer_148]")).click();
-        $(cssSelector("[name=producer_14]")).click();
-        $(cssSelector("[name=producer_12]")).click();
+        $("#filter_producer_148").click();
+        $("#filter_producer_14").click();
+        $("#filter_producer_12").click();
 
     }
 
     @Then("^sort by popularity$")
     public void SortByPopularity () {
 
-        $(cssSelector("a.dropdown-link")).click();
-        $("#filter_sortpopularity").should(visible).click();
+        $("a.dropdown-link").click();
+        $("#filter_sortpopularity").click();
 
     }
 
     @Then("^select (\\d+) first results$")
     public void SelectResults(int arg1) {
 
-
         for (int i = 0; i < arg1; i++ ) {
-            $$(cssSelector("div.over-wraper")).get(i).hover();
-            $$(cssSelector("[name=comparison_new_catalog]")).get(i).hover().doubleClick();
+            $$("div.over-wraper").get(i).hover();
+            $$("[name=comparison_new_catalog]").get(i).hover().click();
 
         }
     }
@@ -67,8 +66,8 @@ public class RoztkaTest {
     @Then("^compare results$")
     public void CompareResults() {
 
-        $(cssSelector("#comparison-header")).doubleClick();
-        $(cssSelector("div.btn-link-to-compare > a")).doubleClick();
+        $("#comparison-header").click();
+        $("div.btn-link-to-compare > a").hover().click();
 
         //Output compare result to console
 //        ElementsCollection prompt = $$(By.cssSelector("div.comparison-t-row"));
