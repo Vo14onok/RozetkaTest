@@ -7,7 +7,7 @@ Feature: Compare air conditioning
     Then select any city
     Then I using search field search "кондиционер"
     Then select producer "Boch", "LG" and "Samsung"
-#    Then sort by popularity
+    Then sort by popularity
     Then select 3 first results
     Then compare results
     Then take screenshot
