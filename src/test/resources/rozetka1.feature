@@ -1,6 +1,6 @@
 Feature: Compare air conditioning
 
-  @Broken
+  @SmokeTest
   Scenario: Go to rozetka.com and compare air conditioning
 
     Given I open chrome and go to rozetka.com.ua
