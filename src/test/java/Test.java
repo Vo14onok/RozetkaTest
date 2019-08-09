@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
         features = {"src/test/resources"},
         glue = {"stepdefs"},
         plugin = {"pretty"},
-        tags = {"@Broken, @NewTest"}
+        tags = {"@SmokeTest"}
 )
 
 public class Test {
