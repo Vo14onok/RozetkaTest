@@ -10,4 +10,3 @@ Feature: Compare air conditioning
     Then sort by popularity
     Then select 3 first results
     Then compare results
-    Then take screenshot
