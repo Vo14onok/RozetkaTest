@@ -7,11 +7,11 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import pages.ComparePage;
 import pages.MainPage;
 import pages.ProductsPage;
 
 import java.io.IOException;
+import java.util.List;
 
 import static com.codeborne.selenide.Selenide.open;
 import static pages.Constants.ROZETKA_URL;
@@ -20,8 +20,6 @@ public class RoztkaTest {
 
     private MainPage mainPage = new MainPage();
     private ProductsPage productsPage = new ProductsPage();
-    private ComparePage comparePage = new ComparePage();
-//    ComparedProductsPage comparedProductsPage = new ComparedProductsPage();
 
     @Before
     public static void setUp() {
@@ -30,44 +28,46 @@ public class RoztkaTest {
         WebDriverManager.chromedriver().version("75").setup();
     }
 
-    @Given("^I open chrome and go to ([a-z]+.+[com]+.+[ua])$")
+    @Given("^I open chrome and go to rozetka.com.ua$")
     public void GoToRozetka() {
+
         open(ROZETKA_URL);
+
     }
 
     @Then("^select any city$")
     public void SelectCity() {
+
         mainPage.openCitiesChoiceWindow().chooseRandomCity();
+
     }
 
     @Then("^I using search field search \"([^\"\"$]*)\"$")
-    public void SearchItems(String arg1) {
+    public void SearchItems(String searchParameter) {
 
-        mainPage.makeSearch(arg1);
-
-    }
-
-    @Then("^select producer \"([^\"\"$]*)\", \"([^\"\"$]*)\" and \"([^\"\"$]*)\"$")
-    public void SelectProducer(String arg1, String arg2, String arg3) {
-
-        productsPage.Producer(arg1, arg2, arg3);
+        mainPage.makeSearch(searchParameter);
 
     }
 
-    @Then("^sort by popularity$")
-    public void SortByPopularity() {
+    @Then("^select product owners$")
+    public void SelectProducer(List<String> productOwners) {
 
-        productsPage.SortMenu();
-        productsPage.SortMenuChoiseByPopularyty();
+        productsPage.selectProductOwner(productOwners);
+
+    }
+
+    @Then("^sort by ([^\"\"$]*)$")
+    public void SortByPopularity(String sortChoice) {
+
+        productsPage.openSortMenu().selectSortChoise(sortChoice);
 
     }
 
     @Then("^select (\\d+) first results$")
-    public void SelectResults(int arg1) {
+    public void SelectResults(int numOfResults) {
 
-        for (int i = 0; i < arg1; i++) {
-            productsPage.ProductItem(i);
-            productsPage.ProductItemComparisionIcon(i);
+        for (int i = 0; i < numOfResults; i++) {
+            productsPage.hoverProductItem(i).clickProductItemComparisionIcon(i);
 
         }
     }
@@ -76,13 +76,6 @@ public class RoztkaTest {
     public void CompareResults() {
 
         mainPage.goToComparisionPage().compareItems().printDifferent();
-
-        //Output compare result to console
-//        ElementsCollection prompt = $$(By.cssSelector("div.comparison-t-row"));
-//        for (WebElement item:prompt) {
-//            String a = item.getText();
-//            System.out.println(a);
-//        }
 
     }
 
