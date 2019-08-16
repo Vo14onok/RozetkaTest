@@ -6,13 +6,13 @@ public class SecondHeader implements Header {
 
     @Override
     public CitiesChoicePage openCitiesChoiceWindow() {
-        $(".header-cities__link.link-dashed").click();
+        $("#city-chooser").click();
         return new CitiesChoicePage();
     }
 
     @Override
     public MainPageHeader makeSearch(String searchParameter) {
-        $("[name=search]").val(searchParameter).pressEnter();
+        $("rz-header-search-input-text passive").val(searchParameter).pressEnter();
         return new MainPageHeader();
     }
 

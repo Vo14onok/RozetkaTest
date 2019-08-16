@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class ProductsPage {
 
-    private final ElementsCollection productElements = $$("div.over-wraper");
+    private ElementsCollection productElements = $$("div.over-wraper");
 
     public ProductsPage selectProductOwner(List<String> productOwners) {
 
@@ -44,15 +44,18 @@ public class ProductsPage {
     }
 
     public ProductsPage clickProductItemComparisionIcon (int i) {
-        productElements.get(i).hover().$$("[name=comparison_new_catalog]").get(i).hover().click();
+        productElements.get(i).hover();
+        $$("[name=comparison_new_catalog]").get(i).hover().click();
         return new ProductsPage();
 
     }public ProductsPage clickProductItemAddToWishlist (int i) {
-        productElements.get(i).hover().$$("[name=wishlists_catalog_new_tile]").get(i).hover().click();
+        productElements.get(i).hover();
+        $$("[name=wishlists_catalog_new_tile]").get(i).hover().click();
         return new ProductsPage();
 
     }public ProductPage clickProductItemAddToKart (int i) {
-        productElements.get(i).hover().$$("[name=buy_catalog]").get(i).hover().click();
+        productElements.get(i).hover();
+        $$("[name=buy_catalog]").get(i).hover().click();
         return new ProductPage();
     }
 

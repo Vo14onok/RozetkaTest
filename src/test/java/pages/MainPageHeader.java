@@ -18,7 +18,7 @@ public class MainPageHeader implements Header {
 
     @Override
     public ComparePage goToComparisionPage() {
-        $("#comparison-header").click();
+        $("header-actions__button-icon").click();
         return new ComparePage();
     }
 
