@@ -1,6 +1,8 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +12,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class ProductsPage {
 
+    private final ElementsCollection productElements = $$("div.over-wraper");
 
     public ProductsPage selectProductOwner(List<String> productOwners) {
 
@@ -35,14 +38,22 @@ public class ProductsPage {
         return new SortMenu();
     }
 
-    public ProductsPage hoverProductItem (int i) {
-        $$("div.over-wraper").get(i).hover();
+    public ProductsPage clickProductItem (int i) {
+        productElements.get(i).click();
         return new ProductsPage();
     }
 
     public ProductsPage clickProductItemComparisionIcon (int i) {
-        $$("[name=comparison_new_catalog]").get(i).hover().click();
+        productElements.get(i).hover().$$("[name=comparison_new_catalog]").get(i).hover().click();
         return new ProductsPage();
+
+    }public ProductsPage clickProductItemAddToWishlist (int i) {
+        productElements.get(i).hover().$$("[name=wishlists_catalog_new_tile]").get(i).hover().click();
+        return new ProductsPage();
+
+    }public ProductPage clickProductItemAddToKart (int i) {
+        productElements.get(i).hover().$$("[name=buy_catalog]").get(i).hover().click();
+        return new ProductPage();
     }
 
 }

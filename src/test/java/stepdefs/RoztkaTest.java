@@ -8,6 +8,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.MainPage;
+import pages.MainPageHeader;
 import pages.ProductsPage;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class RoztkaTest {
 
     private MainPage mainPage = new MainPage();
     private ProductsPage productsPage = new ProductsPage();
+    private MainPageHeader mainPageHeader = new MainPageHeader();
 
     @Before
     public static void setUp() {
@@ -38,14 +40,14 @@ public class RoztkaTest {
     @Then("^select any city$")
     public void SelectCity() {
 
-        mainPage.openCitiesChoiceWindow().chooseRandomCity();
+        mainPageHeader.openCitiesChoiceWindow().chooseRandomCity();
 
     }
 
     @Then("^I using search field search \"([^\"\"$]*)\"$")
     public void SearchItems(String searchParameter) {
 
-        mainPage.makeSearch(searchParameter);
+        mainPageHeader.makeSearch(searchParameter);
 
     }
 
@@ -67,7 +69,7 @@ public class RoztkaTest {
     public void SelectResults(int numOfResults) {
 
         for (int i = 0; i < numOfResults; i++) {
-            productsPage.hoverProductItem(i).clickProductItemComparisionIcon(i);
+            productsPage.clickProductItemComparisionIcon(i);
 
         }
     }
