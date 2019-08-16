@@ -7,9 +7,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import pages.MainPage;
-import pages.MainPageHeader;
-import pages.ProductsPage;
+import pages.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +19,8 @@ public class RoztkaTest {
 
     private MainPage mainPage = new MainPage();
     private ProductsPage productsPage = new ProductsPage();
-    private MainPageHeader mainPageHeader = new MainPageHeader();
+    private Header mainPageHeader = new MainPageHeader();
+    private Header secondHeader = new SecondHeader();
 
     @Before
     public static void setUp() {
@@ -77,7 +76,7 @@ public class RoztkaTest {
     @Then("^compare results$")
     public void CompareResults() {
 
-        mainPage.goToComparisionPage().compareItems().printDifferent();
+        secondHeader.goToComparisionPage().compareItems().printDifferent();
 
     }
 
