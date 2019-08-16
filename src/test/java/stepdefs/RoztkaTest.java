@@ -1,83 +1,74 @@
 package stepdefs;
 
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.junit.ScreenShooter;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.*;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
+import static com.codeborne.selenide.Selenide.open;
+import static pages.Constants.ROZETKA_URL;
 
 public class RoztkaTest {
 
-    private WebDriver driver;
+    private MainPage mainPage = new MainPage();
+    private ProductsPage productsPage = new ProductsPage();
+    private Header mainPageHeader = new MainPageHeader();
+    private Header secondHeader = new SecondHeader();
 
-    @Given("^I open chrome and go to ([a-z]+.+[com]+.+[ua])$")
-    public void GoToRozetka(String arg1) {
+    @Before
+    public static void setUp() {
+        Configuration.timeout = 30000;
+        Configuration.browserSize = "1920x1080";
+        WebDriverManager.chromedriver().version("75").setup();
+    }
 
-        ChromeOptions options = new ChromeOptions();
-        WebDriverManager.chromedriver().setup();
-        options.addArguments("start-maximized")
-               .addArguments("disable-notifications");
-        driver = new ChromeDriver(options);
-        driver.get("http:\\" + arg1);
+    @Given("^I open chrome and go to rozetka.com.ua$")
+    public void GoToRozetka() {
+
+        open(ROZETKA_URL);
 
     }
 
     @Then("^select any city$")
     public void SelectCity() {
 
-        driver.findElement(By.cssSelector(".header-cities__link.link-dashed")).click();
-        int element = new Random().nextInt((driver.findElements(By.cssSelector("a.header-location__popular-link")).size()) - 1);
-        driver.findElements(By.cssSelector("a.header-location__popular-link")).get(element).click();
+        mainPageHeader.openCitiesChoiceWindow().chooseRandomCity();
 
     }
 
     @Then("^I using search field search \"([^\"\"$]*)\"$")
-    public void SearchItems(String arg1) {
+    public void SearchItems(String searchParameter) {
 
-        driver.findElement(By.cssSelector("[name=search]")).sendKeys(arg1);
-        driver.findElement(By.cssSelector("[name=search]")).sendKeys(Keys.ENTER);
-
-    }
-
-    @Then("^select producer \"Boch\", \"LG\" and \"Samsung\"$")
-    public void SelectProducer() {
-
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[name=producer_148]"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[name=producer_14]"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[name=producer_12]"))).click();
+        mainPageHeader.makeSearch(searchParameter);
 
     }
 
-    @Then("^sort by popularity$")
-    public void SortByPopularity () {
+    @Then("^select product owners$")
+    public void SelectProducer(List<String> productOwners) {
 
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#sort_view > a"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#filter_sortpopularity"))).click();
-//        driver.findElement(By.cssSelector("#sort_view > a")).click();
-//        driver.findElement(By.cssSelector("#filter_sortpopularity")).click();
+        productsPage.selectProductOwner(productOwners);
+
+    }
+
+    @Then("^sort by ([^\"\"$]*)$")
+    public void SortByPopularity(String sortChoice) {
+
+        productsPage.openSortMenu().selectSortChoise(sortChoice);
 
     }
 
     @Then("^select (\\d+) first results$")
-    public void SelectResults(int arg1) {
+    public void SelectResults(int numOfResults) {
 
-        for (int i = 0; i < arg1; i++ ) {
-            WebElement conditioner = driver.findElements(By.cssSelector("div.over-wraper")).get(i);
-            new Actions(driver).moveToElement(conditioner).perform();
-            driver.findElements(By.cssSelector("[name=comparison_new_catalog]")).get(i).click();
+        for (int i = 0; i < numOfResults; i++) {
+            productsPage.clickProductItemComparisionIcon(i);
 
         }
     }
@@ -85,32 +76,24 @@ public class RoztkaTest {
     @Then("^compare results$")
     public void CompareResults() {
 
-        WebElement compare = driver.findElement(By.cssSelector("#comparison-header"));
-        new Actions(driver).moveToElement(compare).perform();
-        driver.findElement(By.cssSelector("#comparison-header")).click();
-        driver.findElement(By.cssSelector("div.btn-link-to-compare > a")).click();
-
-        //Output compare result to console
-        List<WebElement> prompt = driver.findElements(By.cssSelector("div.comparison-t-row"));
-        for (WebElement item:prompt) {
-            String a = item.getText();
-            System.out.println(a);
-        }
+        secondHeader.goToComparisionPage().compareItems().printDifferent();
 
     }
 
-    @Then("^take screenshot$")
-    public void TakeScreenshot () throws IOException {
+    @After
+    public void TakeScreenshot() throws IOException {
 
-        File screenshot =((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(screenshot, new File(System.getProperty("user.dir")
-                + File.separator
-                + "screenshot"
-                + File.separator
-                + java.time.LocalDate.now()
-                +".jpg"));
+        ScreenShooter.failedTests().succeededTests();
 
-        driver.quit();
+//        File screenshot =((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+//        FileUtils.copyFile(screenshot, new File(System.getProperty("user.dir")
+//                + File.separator
+//                + "screenshot"
+//                + File.separator
+//                + java.time.LocalDate.now()
+//                +".jpg"));
+//
+//        driver.quit();
 
     }
 

@@ -6,7 +6,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = {"src/test/resources"},
         glue = {"stepdefs"},
-        plugin = {"pretty"}
+        plugin = {"pretty"},
+        tags = {"@SmokeTest"}
 )
 
 public class Test {
