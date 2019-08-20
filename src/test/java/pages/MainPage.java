@@ -8,5 +8,9 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class MainPage {
 
+//    //Hardcode to tablet
+//    public ProductsTypeMenu choiceTypeOfProduct() {
+//        new
+//    }
 
 }

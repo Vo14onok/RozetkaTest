@@ -2,8 +2,12 @@ package pages;
 
 public interface Header {
 
-    public CitiesChoicePage openCitiesChoiceWindow();
-    public MainPageHeader makeSearch(String searchParameter);
-    public ComparePage goToComparisionPage();
+    CitiesChoicePage openCitiesChoiceWindow();
+    Header makeSearch(String searchParameter);
+    Header changeLanguage(String language);
+    Header clickOnCartIcon();
+    ComparePage goToComparisionPage();
+
+
 
 }

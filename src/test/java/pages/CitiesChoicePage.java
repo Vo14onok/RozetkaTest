@@ -2,6 +2,7 @@ package pages;
 
 import java.util.Random;
 
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 /**
@@ -13,4 +14,10 @@ public class CitiesChoicePage {
         $$("a.header-location__popular-link").get(element).click();
         return new MainPageHeader();
     }
+
+    public MainPageHeader searchByTypingInSearchField(String city) {
+        $("ng-pristine ng-valid ng-touched").setValue(city).pressEnter();
+        return new MainPageHeader();
+    }
+
 }

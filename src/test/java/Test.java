@@ -5,9 +5,12 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = {"src/test/resources"},
-        glue = {"stepdefs"},
+        glue = {"classpath:stepdefs"},
         plugin = {"pretty"},
-        tags = {"@SmokeTest"}
+        tags = {
+//                "@SmokeTest"
+                "@FirstTest"
+        }
 )
 
 public class Test {
